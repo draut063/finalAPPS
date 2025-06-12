@@ -1,0 +1,410 @@
+@charset "UTF-8";
+
+body {
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: #f8f9fa;
+    margin: 0; /* Remove default body margin */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Styling for the Dashboard Title (now a span) */
+.header .dashboard-title {
+    margin: 0;
+    color: #333;
+    margin-left:20px;
+    font-size: 1.5em; /* Set font size to resemble a heading */                                            
+    font-weight: bold; /* Make it bold */
+    white-space: nowrap; /* Prevent title from wrapping */
+}
+
+/* Consistent Action Link Styling */
+.action-link a {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 1px solid #007BFF;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.action-link a:hover {
+    background-color: #007BFF;
+    color: white;
+    border-color: #0056b3;
+}
+
+.container {
+    max-width: 1200px; /* Max width for desktop content */
+    margin: 0 auto; /* Center the container */
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.calendar-nav {
+    display: flex;
+    justify-content: center; /* Center buttons on desktop */
+    align-items: center; /* Vertically align items */
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allows items to wrap if needed */
+    gap: 10px; /* Space between buttons */
+}
+
+.calendar-nav .view-label { /* New style for the "View:" text */
+    font-weight: bold;
+    margin-right: 5px; /* Small space before the buttons */
+    white-space: nowrap; /* Prevent "View:" from wrapping */
+}
+
+.calendar-nav button {
+    padding: 6px 12px;
+    background-color: #248cc1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+.calendar-nav button:hover {
+    background-color: #1b6a98;
+}
+
+.calendar-grid {
+    display: grid;
+    gap: 10px;
+}
+
+.day {
+    border: 1px solid #eee;
+    padding: 10px;
+    background-color: #fdfdfd;
+    border-radius: 6px;
+    /* --- KEY FOR DESKTOP SCROLLING (APPLIES TO ALL VIEWS) --- */
+    max-height: 250px; /* Limits height on desktop, allowing internal scroll */
+    overflow-y: auto; /* Enables vertical scrolling when content exceeds max-height */
+    /* -------------------------------------------------------- */
+    display: flex;
+    flex-direction: column; /* Ensures content stacks vertically */
+}
+
+.day h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.appointment {
+    background-color: #e6f4ff;
+    border: 1px solid #b3e0ff;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes action buttons to bottom */
+}
+
+/* Status-specific styling for appointments */
+.appointment.status-Accepted {
+    background-color: #d4edda; /* Light green */
+    border-color: #28a745; /* Darker green */
+}
+
+.appointment.status-Rejected {
+    background-color: #f8d7da; /* Light red */
+    border-color: #dc3545; /* Darker red */
+}
+
+.appointment.status-Rescheduled {
+    background-color: #fff3cd; /* Light yellow */
+    border-color: #ffc107; /* Darker yellow */
+}
+
+.appointment.status-Pending {
+    background-color: #e6f4ff;
+    border-color: #b3e0ff;
+}
+
+.appointment strong {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.appointment p {
+    margin: 2px 0;
+}
+
+.appointment-actions {
+    margin-top: auto; /* Pushes actions to the bottom of the appointment card */
+}
+
+.appointment-actions .row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px; /* Space between rows of buttons */
+}
+
+.appointment-actions .row:last-child {
+    margin-bottom: 0; /* No margin after the last row */
+}
+
+.appointment-actions .full-width {
+    width: 100%;
+}
+
+.appointment-actions button {
+    flex: 1;
+    padding: 6px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Button specific colors */
+.accept { background-color: #28a745; color: white; }
+.change { background-color: #ffc107; color: black; }
+.reject { background-color: #dc3545; color: white; }
+
+.appointment-actions button:hover {
+    opacity: 0.9;
+}
+
+/* Styling for disabled buttons */
+.appointment-actions button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Styling for status text within appointment card */
+.appointment-status {
+    font-weight: bold;
+    text-align: right;
+    margin-top: 5px;
+    margin-bottom: 10px; /* Space before action buttons */
+    font-size: 0.85em;
+    color: #555;
+}
+.appointment-status.Accepted { color: #28a745; }
+.appointment-status.Rejected { color: #dc3545; }
+.appointment-status.Rescheduled { color: #ffc107; }
+.appointment-status.Pending { color: #007bff; }
+
+/* Scrollbar styling for day boxes on desktop */
+.day::-webkit-scrollbar {
+    width: 6px;
+}
+.day::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+/* View-specific grid layouts (Desktop First) */
+.calendar-grid.day-view {
+    grid-template-columns: 1fr; /* Single column for day view */
+}
+
+.calendar-grid.day-view .day {
+    /* Updated for more consistent 'small' size on desktop */
+    max-width: 300px; /* Limit width of day view to be closer to month/week density */
+    margin: 0 auto; /* Center the day view */
+}
+
+.calendar-grid.day-view .appointment {
+    font-size: 0.85em; /* Adjusted to match week view for more consistency */
+}
+
+.calendar-grid.day-view .appointment-actions button {
+    font-size: 11px; /* Adjusted to match week view for more consistency */
+    padding: 5px;
+}
+
+.calendar-grid.week-view {
+    /* UPDATED: Now uses the same minmax as month view for consistent day box width */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.calendar-grid.week-view .appointment {
+    font-size: 0.7em; /* Adjusted to match month view for new narrow width */
+}
+.calendar-grid.week-view .appointment-actions button {
+    font-size: 9px; /* Adjusted to match month view for new narrow width */
+    padding: 3px;
+}
+
+.calendar-grid.month-view {
+    /* Remains the same - already the narrower standard */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* No change needed for .month-view .day as max-height/overflow-y is already on .day */
+
+.month-view .appointment {
+    font-size: 0.7em; /* Even smaller for month view */
+    margin-bottom: 2px;
+}
+
+.month-view .appointment-actions {
+    margin-top: auto;
+}
+
+.month-view .appointment-actions button {
+    font-size: 9px; /* Smallest buttons for month view */
+    padding: 3px;
+}
+
+/* --- Responsive Adjustments for Mobile and Tablets --- */
+/* This media query targets screens up to 992px wide,
+   covering most tablets and large smartphones (like iPhone 14 Pro Max in landscape) */
+@media (max-width: 992px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px; /* Adjust container padding for mobile */
+    }
+
+    /* Header adjustments for mobile - single line */
+    .header {
+        flex-direction: row; /* Keep header items in a row */
+        justify-content: space-between; /* Space out title and logout */
+        align-items: center; /* Vertically center items */
+        margin-bottom: 15px;
+        text-align: left; /* Align text to left if header is flex-row */
+    }
+    .header .dashboard-title {
+        margin-bottom: 0; /* Remove bottom margin */
+        font-size: 20px; /* Slightly smaller title for single line */
+    }
+    .logout-link {
+        width: auto; /* Allow link to size naturally */
+        margin-right: 0;
+    }
+    .logout-link a {
+        display: inline-block; /* Keep as inline-block */
+        padding: 4px 8px; /* Smaller padding for logout button */
+        font-size: 13px; /* Smaller font size for logout button */
+    }
+
+    /* Calendar navigation adjustments for mobile - single line, wrapping if needed */
+    .calendar-nav {
+        flex-direction: row; /* Keep buttons in a row */
+        flex-wrap: wrap; /* Allow buttons to wrap to next line if space is tight */
+        justify-content: center; /* Center buttons horizontally */
+        align-items: center; /* Vertically align items (text and buttons) */
+        gap: 6px; /* Reduced gap between buttons */
+        margin-bottom: 15px;
+    }
+    .calendar-nav .view-label {
+        font-size: 14px; /* Adjust size of "View:" text */
+        margin-right: 2px; /* Less space before buttons */
+    }
+    .calendar-nav button {
+        flex-grow: 0; /* Prevent buttons from growing */
+        padding: 6px 10px; /* Smaller padding for navigation buttons */
+        font-size: 14px; /* Smaller font size for navigation buttons */
+    }
+
+    /* Calendar grid adjustments for mobile - force single column for all views */
+    .calendar-grid.week-view,
+    .calendar-grid.month-view,
+    .calendar-grid.day-view { /* Explicitly include day-view for clarity on mobile consistency */
+        grid-template-columns: 1fr; /* Force a single column for days */
+        gap: 15px;
+    }
+
+    /* Adjust day box height for mobile view - allow content to expand */
+    .day {
+        max-height: none; /* Allow day box to expand to fit content on mobile */
+        overflow-y: visible; /* No internal scrollbar on individual days, let the page scroll */
+        padding: 15px; /* More padding for days on mobile */
+    }
+    .day h4 {
+        font-size: 18px;
+    }
+
+    /* Appointment styling for better readability on mobile - applies consistently across all views */
+    .appointment {
+        font-size: 0.95em;
+        padding: 10px;
+    }
+
+    /* START OF CHANGE: Keep buttons in a row on mobile */
+    .appointment-actions .row {
+        flex-direction: row; /* Keep buttons in a row */
+        gap: 6px; /* Maintain small gap */
+        justify-content: space-between; /* Distribute space between buttons */
+    }
+
+    .appointment-actions .row:first-child {
+        /* Specific adjustment for the 'Accept' button row if it's full-width */
+        justify-content: center; /* Center the single full-width button */
+    }
+
+    .appointment-actions button {
+        flex: 1; /* Allow buttons to share space equally */
+        font-size: 12px; /* Adjust font size to fit */
+        padding: 8px; /* Adjust padding for better touch target */
+        width: auto; /* Reset width to auto for flexbox to control */
+    }
+
+    .appointment-actions .full-width {
+        width: 100%; /* Keep full width for the single accept button */
+    }
+    /* END OF CHANGE */
+}
+
+/* Further refinement for very small screens (e.g., typical ~320-400px mobile widths) */
+@media (max-width: 480px) {
+    body {
+        padding: 5px; /* Reduce padding on very small screens */
+    }
+    .container {
+        padding: 10px;
+    }
+    .header .dashboard-title {
+        font-size: 18px; /* Even smaller title */
+    }
+    .logout-link a {
+        padding: 3px 6px; /* Even smaller logout button */
+        font-size: 12px;
+    }
+    .calendar-nav button {
+        padding: 5px 8px; /* Even smaller nav buttons */
+        font-size: 13px;
+    }
+    .calendar-nav .view-label {
+        font-size: 13px;
+    }
+    .appointment {
+        font-size: 0.9em;
+    }
+    .appointment-actions .row {
+        gap: 4px; /* Reduce gap further for very small screens */
+    }
+    .appointment-actions button {
+        font-size: 11px; /* Even smaller font size for buttons */
+        padding: 6px; /* Even smaller padding */
+    }
+}

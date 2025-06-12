@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration - SCDL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #f9e9de;
+            color: black;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+
+        .logo-container img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .navbar-right {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-right a {
+            color: black;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-right a:hover {
+            color: #007BFF;
+        }
+
+        .registration-container {
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+            margin-top: 100px; /* Space from fixed navbar */
+        }
+
+        .registration-container h2 {
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        .registration-container label {
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .registration-container input[type="text"],
+        .registration-container input[type="email"],
+        .registration-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Styles for password eye icon */
+        .password-wrapper {
+            position: relative;
+            margin-bottom: 20px; /* Add margin to the wrapper */
+        }
+
+        .password-wrapper input[type="password"],
+        .password-wrapper input[type="text"] { /* Also target text when toggled */
+            padding-right: 40px; /* Make space for the eye icon */
+            margin-bottom: 0; /* Remove bottom margin from input, wrapper handles it */
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888; /* Consistent color for the icon */
+            font-size: 18px; /* Adjust size of eye icon */
+            user-select: none; /* Prevent text selection */
+        }
+
+        .toggle-password:hover {
+            color: #333;
+        }
+
+        .registration-container button {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 10px; /* Added margin for button */
+            transition: background-color 0.3s ease;
+        }
+
+        .registration-container button:hover {
+            background-color: #5e35b1;
+        }
+
+        .login-link {
+            display: block;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 16px;
+            transition: text-decoration 0.3s ease;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+                font-size: 18px;
+            }
+            .logo-container {
+                margin-left: 0;
+                justify-content: center;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .navbar-right {
+                margin-right: 0;
+                justify-content: center;
+                width: 100%;
+            }
+            .registration-container {
+                padding: 30px 20px;
+                margin-top: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="scdl.png" alt="Logo" />
+            <span>Symbiosis Center for Distance Learning</span>
+        </div>
+       
+    </nav>
+
+    <div class="registration-container">
+        <h2>Employee Registration</h2>
+        <div id="errorMessage" style="color: red; margin-bottom: 15px;"></div>
+        
+        <form action="EmployeeRegistrationServlet" method="POST">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+
+            <label for="employeeEmail">Email:</label>
+            <input type="email" id="employeeEmail" name="employeeEmail" placeholder="Enter your official email" required>
+            
+            <label for="employeeId">Employee ID:</label>
+            <input type="text" id="employeeId" name="employeeId" placeholder="Enter your Employee ID" required>
+            
+
+            <label for="newPassword">Password:</label>
+            <div class="password-wrapper">
+                <input type="password" id="newPassword" name="newPassword" placeholder="Create a password" required>
+                <span class="toggle-password" onclick="togglePasswordVisibility('newPassword', this)">
+                    <i class="fas fa-eye"></i>
+                </span>
+            </div>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <div class="password-wrapper">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                <span class="toggle-password" onclick="togglePasswordVisibility('confirmPassword', this)">
+                    <i class="fas fa-eye"></i>
+                </span>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+        <a href="employee-login.html" class="login-link">Already have an account? Login Here</a>
+    </div>
+
+    <script>
+        function togglePasswordVisibility(id, iconElement) {
+            const input = document.getElementById(id);
+            const eyeIcon = iconElement.querySelector('i');
+
+            if (input.type === "password") {
+                input.type = "text";
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Script to display error/success messages from URL parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const errorMessageDiv = document.getElementById('errorMessage');
+
+            if (params.has('error')) {
+                errorMessageDiv.style.color = 'red';
+                errorMessageDiv.innerText = decodeURIComponent(params.get('error'));
+            } else if (params.has('registrationSuccess')) {
+                errorMessageDiv.style.color = 'green';
+                errorMessageDiv.innerText = 'Registration successful! You can now log in.';
+                // Optionally redirect after a few seconds
+                // setTimeout(() => {
+                //     window.location.href = 'employee-login.html';
+                // }, 3000);
+            }
+        });
+    </script>
+
+</body>
+</html>

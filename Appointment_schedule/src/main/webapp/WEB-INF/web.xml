@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         id="WebApp_ID" version="5.0">
+
+    <display-name>Appointment_schedule</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>mail.smtp.host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mail.smtp.port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>CalendarServlet</servlet-name>
+        <servlet-class>com.yourpackage.CalendarServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CalendarServlet</servlet-name>
+        <url-pattern>/calendar.jsp</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>UpdateAppointmentServlet</servlet-name>
+        <servlet-class>com.appointment.schedule.UpdateAppointmentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateAppointmentServlet</servlet-name>
+        <url-pattern>/U1/UpdateAppointmentServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+   
+   
+    </web-app>

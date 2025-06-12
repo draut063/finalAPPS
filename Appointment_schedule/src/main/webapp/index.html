@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f4f4f4;
+    }
+
+    .navbar {
+      width: 100%;
+      background-color: #f9e9de;
+      color: black;
+      padding: 15px;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Keeps logo left, Staff Gateway right */
+      z-index: 1000;
+      min-height: 60px;
+      flex-wrap: nowrap; /* Ensures main navbar items stay on one line */
+      overflow-x: auto; /* Allow horizontal scroll if content overflows, to show full text */
+      -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      flex-wrap: nowrap; /* Logo and text stay on one line within this container */
+      flex-shrink: 0; /* Important: Prevents this container from shrinking */
+      /* No min-width: 0; because we want it to take its full content width */
+    }
+
+    .logo-container img {
+      height: 50px; /* Normal size */
+      margin-right: 10px;
+      flex-shrink: 0; /* Prevents image from shrinking */
+    }
+
+    /* Style for the text next to the logo */
+    .logo-container span {
+        font-size: 22px; /* Default desktop font size */
+        line-height: 1.2;
+        white-space: nowrap; /* Force text to stay on one line */
+        /* Removed overflow and text-overflow to ensure full visibility */
+        flex-shrink: 0; /* Important: Prevents text from shrinking, ensures full view */
+    }
+
+    .navbar-right {
+        margin-right: 20px;
+        display: flex;
+        align-items: center;
+        flex-shrink: 1; /* Allow this to shrink significantly */
+        min-width: 0; /* Allows it to shrink to zero width if needed */
+        white-space: nowrap; /* Ensures "Staff Gateway" stays on one line */
+        overflow: hidden; /* Hide overflow if text is too long */
+        text-overflow: ellipsis; /* Add ellipsis if text is truncated */
+    }
+
+    .navbar-right a {
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 15px; /* Default desktop font size for link */
+        color: black;
+    }
+
+    .navbar-right a:hover {
+        color: #007BFF;
+    }
+
+    .main-container {
+      display: flex;
+      flex: 1;
+      margin-top: 80px;
+      height: calc(100vh - 80px);
+    }
+
+    .image-container {
+      flex: 60%;
+      background: url('scdl1.png') no-repeat center center;
+      background-size: cover;
+      position: relative;
+    }
+
+    .image-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .login-container {
+      flex: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      padding: 40px 20px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 350px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007BFF;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #5e35b1;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    /* Media query for mobile/tablet */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+
+      .image-container {
+        height: 200px;
+        flex: none;
+        background-size: cover;
+      }
+
+      .login-container {
+        flex: none;
+        padding: 20px;
+      }
+
+      /* Navbar specific adjustments for smaller screens */
+      .navbar {
+        padding: 10px; /* Slightly reduce padding */
+      }
+
+      .logo-container {
+        margin-left: 10px; /* Reduce left margin */
+      }
+
+      .logo-container img {
+        height: 45px; /* Slightly smaller image on mobile, but still clear */
+      }
+
+      .logo-container span {
+        font-size: 18px; /* Smaller font size on mobile for full visibility */
+      }
+
+      .navbar-right {
+        margin-right: 10px; /* Reduce right margin */
+      }
+
+      .navbar-right a {
+        font-size: 13px; /* Smaller font for staff gateway link on mobile */
+      }
+    }
+
+    /* For very small phones, adjust further */
+    @media (max-width: 420px) {
+      .navbar {
+        padding: 8px; /* Even less padding */
+      }
+
+      .logo-container {
+        margin-left: 5px; /* Even smaller left margin */
+      }
+
+      .logo-container img {
+        height: 40px; /* Smallest image size for very small screens */
+      }
+
+      .logo-container span {
+        font-size: 14px; /* Smallest font size for the text to remain fully visible */
+      }
+
+      .navbar-right {
+        margin-right: 5px; /* Even smaller right margin */
+      }
+
+      .navbar-right a {
+        font-size: 11px; /* Even smaller font for the link, to maximize space for span */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="scdl.png" alt="Logo" />
+      <span>Symbiosis Center for Distance Learning</span>
+    </div>
+    <div class="navbar-right">
+        <a href="employee-login.html">Staff Gateway</a>
+        </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="image-container"></div>
+
+    <div class="login-container">
+      <div class="login-box">
+        <h2>Login</h2>
+        <form action="LoginServlet" method="POST">
+          <input type="text" name="Username" placeholder="Username" required />
+          <input type="password" name="Password_AU" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+        <div class="error">
+          <script>
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('error')) {
+              document.write(decodeURIComponent(params.get('error')));
+            }
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
